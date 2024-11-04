@@ -38,9 +38,12 @@ public class View extends javax.swing.JFrame {
         fotoUser = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         nomeAno.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         nomeAno.setText("Ano de Nascimento");
+        getContentPane().add(nomeAno, new org.netbeans.lib.awtextra.AbsoluteConstraints(58, 62, -1, -1));
+        getContentPane().add(dataNascimento, new org.netbeans.lib.awtextra.AbsoluteConstraints(257, 65, 73, 25));
 
         btnCalcular.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btnCalcular.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/ifba/atividade001/images/download.png"))); // NOI18N
@@ -50,76 +53,32 @@ public class View extends javax.swing.JFrame {
                 btnCalcularActionPerformed(evt);
             }
         });
+        getContentPane().add(btnCalcular, new org.netbeans.lib.awtextra.AbsoluteConstraints(58, 139, -1, 47));
 
         nameIdade.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         nameIdade.setText("Idade:");
+        getContentPane().add(nameIdade, new org.netbeans.lib.awtextra.AbsoluteConstraints(58, 233, -1, -1));
 
         idadeResult.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         idadeResult.setText("0");
+        getContentPane().add(idadeResult, new org.netbeans.lib.awtextra.AbsoluteConstraints(125, 233, 92, -1));
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(284, 139, -1, -1));
 
         fotoUser.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/ifba/atividade001/images/images.jpg"))); // NOI18N
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(58, 58, 58)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(btnCalcular, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                .addGap(3, 3, 3)
-                                .addComponent(nameIdade)
-                                .addGap(18, 18, 18)
-                                .addComponent(idadeResult, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                        .addGap(514, 514, 514))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(nomeAno)
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(dataNascimento, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(fotoUser)
-                                .addGap(49, 49, 49)
-                                .addComponent(jLabel4)
-                                .addGap(150, 150, 150))))))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(62, 62, 62)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(nomeAno)
-                    .addComponent(dataNascimento, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(49, 49, 49)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnCalcular, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel4)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(4, 4, 4)
-                        .addComponent(fotoUser)))
-                .addGap(9, 9, 9)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(nameIdade)
-                    .addComponent(idadeResult))
-                .addContainerGap(94, Short.MAX_VALUE))
-        );
+        getContentPane().add(fotoUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 108, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnCalcularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCalcularActionPerformed
         // TODO add your handling code here:
+        
+        // Pegando a data de nascimento e armazenando ela 
         int nascimento = Integer.parseInt(dataNascimento.getValue().toString());
         int ano = 2024;
+        // Fazendo a subtração para resultar a idade
         int idade = ano - nascimento;
+        // Exibindo o resultado
         idadeResult.setText("<html> " + idade);
     }//GEN-LAST:event_btnCalcularActionPerformed
 
