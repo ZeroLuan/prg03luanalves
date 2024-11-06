@@ -118,20 +118,28 @@ public class Contador extends javax.swing.JFrame {
 
     private void buttonContarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonContarActionPerformed
         // TODO add your handling code here: 
+        
+        // Criando as variaveis que recebem os valores dos Sliders
         int guardarValorInicio = sliderInicio.getValue();
         int guardarValorFim = sliderFim.getValue();
         int guardarValorPassos = sliderPasso.getValue();
         
+        // Instanciando o objeto lista, que usa a biblioteca javax.swing.DefaultListModel;
         DefaultListModel lista = new DefaultListModel();
         
+        // Estrutura que adiciona no objeto o contador
         for(int cont = guardarValorInicio; cont <= guardarValorFim; cont += guardarValorPassos){
             lista.addElement(cont);
         }
         
+        // Ele seta os valores, serve para exibir os numeros no Jlist
         exibirNumeros.setModel(lista);
         
     }//GEN-LAST:event_buttonContarActionPerformed
 
+    
+    // Esse metodo assim como o sliderFimStateChanged e sliderPassoStateChanged, Tem como funcionalidade
+    // exibir os valores dos slider no label ao lado direito.
     private void sliderInicioStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_sliderInicioStateChanged
         // TODO add your handling code here:
         int guardarValorInicio = sliderInicio.getValue();
