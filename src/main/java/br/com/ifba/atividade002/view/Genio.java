@@ -34,6 +34,8 @@ public class Genio extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setMinimumSize(new java.awt.Dimension(550, 400));
+        setPreferredSize(new java.awt.Dimension(700, 400));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         pensarValor.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
@@ -54,7 +56,7 @@ public class Genio extends javax.swing.JFrame {
         });
         getContentPane().add(buttonPalpite, new org.netbeans.lib.awtextra.AbsoluteConstraints(95, 196, 111, 45));
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/ifba/atividade002/images/genio.jpg"))); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon("C:\\Users\\a1591\\Documents\\NetBeansProjects\\prg03luanalves\\src\\main\\java\\br\\com\\ifba\\atividade002\\images\\genio.jpg")); // NOI18N
         jLabel1.setText("jLabel1");
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(328, 72, 306, 262));
 
@@ -74,7 +76,7 @@ public class Genio extends javax.swing.JFrame {
         int numeroAleatorio = (int)(Math.random() * (max - min + 1) + min);
         // recebendo o numero selecioado
         int numeroSelecionado = Integer.parseInt(snipperAdicionarNmr.getValue().toString());
-        
+        // condicional que verifica se o numero digitado é == ao numero gerado aleatoriamente
         if(numeroSelecionado == (numeroAleatorio)){
             pensarValor.setText("<html> Acertou !");
         } else {

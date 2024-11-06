@@ -38,6 +38,7 @@ public class View extends javax.swing.JFrame {
         fotoUser = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setMinimumSize(new java.awt.Dimension(500, 320));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         nomeAno.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
@@ -46,14 +47,14 @@ public class View extends javax.swing.JFrame {
         getContentPane().add(dataNascimento, new org.netbeans.lib.awtextra.AbsoluteConstraints(257, 65, 73, 25));
 
         btnCalcular.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        btnCalcular.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/ifba/atividade001/images/download.png"))); // NOI18N
+        btnCalcular.setIcon(new javax.swing.ImageIcon("C:\\Users\\a1591\\Documents\\NetBeansProjects\\prg03luanalves\\src\\main\\java\\br\\com\\ifba\\atividade001\\images\\download.png")); // NOI18N
         btnCalcular.setText("Calcular");
         btnCalcular.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCalcularActionPerformed(evt);
             }
         });
-        getContentPane().add(btnCalcular, new org.netbeans.lib.awtextra.AbsoluteConstraints(58, 139, -1, 47));
+        getContentPane().add(btnCalcular, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 130, 150, 60));
 
         nameIdade.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         nameIdade.setText("Idade:");
@@ -64,7 +65,7 @@ public class View extends javax.swing.JFrame {
         getContentPane().add(idadeResult, new org.netbeans.lib.awtextra.AbsoluteConstraints(125, 233, 92, -1));
         getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(284, 139, -1, -1));
 
-        fotoUser.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/ifba/atividade001/images/images.jpg"))); // NOI18N
+        fotoUser.setIcon(new javax.swing.ImageIcon("C:\\Users\\a1591\\Documents\\NetBeansProjects\\prg03luanalves\\src\\main\\java\\br\\com\\ifba\\atividade001\\images\\images.jpg")); // NOI18N
         getContentPane().add(fotoUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 108, -1, -1));
 
         pack();
