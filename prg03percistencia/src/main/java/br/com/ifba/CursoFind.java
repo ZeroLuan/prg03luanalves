@@ -1,5 +1,6 @@
-/*
+ /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 
 package br.com.ifba;
@@ -9,45 +10,33 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
 
+
 /**
  *
  * @author a1591
  */
-public class CursoSave {
-    
+public class CursoFind {
     
     private final static EntityManagerFactory entityManagerFactory = 
                         Persistence.createEntityManagerFactory("gerenciamento_curso");
     
     private final static EntityManager entityManager = entityManagerFactory.createEntityManager();
+
     
-    
-    public static void main(String[] args) {
-     
-        Curso curso = new Curso();
+    public static void main(String[] args){
         
-        curso.setId(1L);
-        curso.setNome("Analise e Desenvolvimento de Sistemas");
-        curso.setCodigoCurso("ADS");
-        curso.setAtivo(true);
         
-        //SALVANDO UM CURSO
         
+        // FIND(BUSCANDO) UM CURSO
         entityManager.getTransaction().begin();
+        Curso cursoEncontrado = entityManager.find(Curso.class, 1L);
+        System.out.println("Cruso: " + cursoEncontrado.getNome());
         
-        //if (curso.getId() == 1) {
-           // System.out.println("Erro: A entidade ja possui um ID definido!");
-        //} else {
-        //entityManager.persist(curso);
-        //}
-        entityManager.merge(curso);
-        
-        entityManager.getTransaction().commit();
-        
-        //FECHANDO OS RECURSOS
-        
+        // FECHANDO OS RECURSOS
         entityManager.close();
         entityManagerFactory.close();
+        
+        
+        
     }
 }
-

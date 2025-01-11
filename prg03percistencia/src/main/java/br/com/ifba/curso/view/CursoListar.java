@@ -28,14 +28,9 @@ public class CursoListar extends javax.swing.JFrame {
 
         cadastrarNovoCurso = new javax.swing.JButton();
         imprimir = new javax.swing.JButton();
-        exibirInformacao = new javax.swing.JTextField();
         procurar = new javax.swing.JTextField();
-        nome = new javax.swing.JLabel();
-        quantidade = new javax.swing.JLabel();
-        descricao = new javax.swing.JLabel();
-        fornecedor = new javax.swing.JLabel();
-        remover = new javax.swing.JLabel();
-        Editar = new javax.swing.JLabel();
+        scrollTabelaDeInfo = new javax.swing.JScrollPane();
+        tabelaExibir = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -49,32 +44,64 @@ public class CursoListar extends javax.swing.JFrame {
 
         imprimir.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         imprimir.setText("Homescreen");
-
-        exibirInformacao.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        exibirInformacao.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        exibirInformacao.setText("Informação");
+        imprimir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                imprimirActionPerformed(evt);
+            }
+        });
 
         procurar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         procurar.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         procurar.setText("Procurar...");
+        procurar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                procurarActionPerformed(evt);
+            }
+        });
 
-        nome.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        nome.setText("Nome");
+        tabelaExibir.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
+            },
+            new String [] {
+                "ID", "Nome", "Curso", "Ativo", "Remover", "Editar"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Long.class, java.lang.String.class, java.lang.String.class, java.lang.Boolean.class, java.lang.Object.class, java.lang.Object.class
+            };
+            boolean[] canEdit = new boolean [] {
+                true, true, true, true, false, false
+            };
 
-        quantidade.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        quantidade.setText("Quantidade");
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
 
-        descricao.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        descricao.setText("Descrição");
-
-        fornecedor.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        fornecedor.setText("Fornecedor");
-
-        remover.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        remover.setText("Remover");
-
-        Editar.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        Editar.setText("Editar");
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        scrollTabelaDeInfo.setViewportView(tabelaExibir);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -83,48 +110,26 @@ public class CursoListar extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(34, 34, 34)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(exibirInformacao)
+                    .addComponent(scrollTabelaDeInfo)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(procurar, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(174, 174, 174)
+                        .addGap(178, 178, 178)
                         .addComponent(cadastrarNovoCurso, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 178, Short.MAX_VALUE)
                         .addComponent(imprimir, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(34, 34, 34))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(46, Short.MAX_VALUE)
-                .addComponent(nome)
-                .addGap(65, 65, 65)
-                .addComponent(quantidade)
-                .addGap(60, 60, 60)
-                .addComponent(descricao)
-                .addGap(66, 66, 66)
-                .addComponent(fornecedor)
-                .addGap(56, 56, 56)
-                .addComponent(remover)
-                .addGap(72, 72, 72)
-                .addComponent(Editar)
-                .addGap(44, 44, 44))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(23, 23, 23)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cadastrarNovoCurso, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(imprimir, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(procurar, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(49, 49, 49)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(nome)
-                    .addComponent(quantidade)
-                    .addComponent(descricao)
-                    .addComponent(fornecedor)
-                    .addComponent(remover)
-                    .addComponent(Editar))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(exibirInformacao, javax.swing.GroupLayout.PREFERRED_SIZE, 312, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(29, Short.MAX_VALUE))
+                    .addComponent(cadastrarNovoCurso, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(imprimir, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(procurar, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 43, Short.MAX_VALUE)
+                .addComponent(scrollTabelaDeInfo, javax.swing.GroupLayout.PREFERRED_SIZE, 346, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(42, 42, 42))
         );
 
         pack();
@@ -132,7 +137,23 @@ public class CursoListar extends javax.swing.JFrame {
 
     private void cadastrarNovoCursoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cadastrarNovoCursoActionPerformed
         // TODO add your handling code here:
+        
+        CursoAdicionar cursoAdicionar = new CursoAdicionar();
+        //this.dispose();  Essa linha faz fechar a tela assim que abrir a outra
+        cursoAdicionar.setVisible(true);
     }//GEN-LAST:event_cadastrarNovoCursoActionPerformed
+
+    private void imprimirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_imprimirActionPerformed
+        // TODO add your handling code here:
+        
+        
+    }//GEN-LAST:event_imprimirActionPerformed
+
+    private void procurarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_procurarActionPerformed
+         // TODO add your handling code here:
+         
+         
+    }//GEN-LAST:event_procurarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -170,15 +191,10 @@ public class CursoListar extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel Editar;
     private javax.swing.JButton cadastrarNovoCurso;
-    private javax.swing.JLabel descricao;
-    private javax.swing.JTextField exibirInformacao;
-    private javax.swing.JLabel fornecedor;
     private javax.swing.JButton imprimir;
-    private javax.swing.JLabel nome;
     private javax.swing.JTextField procurar;
-    private javax.swing.JLabel quantidade;
-    private javax.swing.JLabel remover;
+    private javax.swing.JScrollPane scrollTabelaDeInfo;
+    private javax.swing.JTable tabelaExibir;
     // End of variables declaration//GEN-END:variables
 }

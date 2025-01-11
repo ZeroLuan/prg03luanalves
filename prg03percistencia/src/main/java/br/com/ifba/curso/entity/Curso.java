@@ -60,8 +60,8 @@ public class Curso {
         return codigoCurso;
     }
     
-    public void setCodigoCurso(){
-        
+    public void setCodigoCurso(String codigoCurso){
+        this.codigoCurso = codigoCurso;
     }
     
     public boolean getAtivo(){
