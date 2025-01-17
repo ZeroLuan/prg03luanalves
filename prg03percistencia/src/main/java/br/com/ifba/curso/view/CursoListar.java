@@ -4,6 +4,10 @@
  */
 package br.com.ifba.curso.view;
 
+import br.com.ifba.curso.entity.Curso;
+import br.com.ifba.curso.model.dao.CategoriaDAO;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author a1591
@@ -15,6 +19,10 @@ public class CursoListar extends javax.swing.JFrame {
      */
     public CursoListar() {
         initComponents();
+        DefaultTableModel model = (DefaultTableModel) tabelaExibir.getModel(); // Gerenciar modelo da tabela
+        
+        // Atualiza a pagina
+        readJTable();
     }
 
     /**
@@ -27,10 +35,12 @@ public class CursoListar extends javax.swing.JFrame {
     private void initComponents() {
 
         cadastrarNovoCurso = new javax.swing.JButton();
-        imprimir = new javax.swing.JButton();
-        procurar = new javax.swing.JTextField();
+        buttonProcurarCurso = new javax.swing.JButton();
         scrollTabelaDeInfo = new javax.swing.JScrollPane();
         tabelaExibir = new javax.swing.JTable();
+        buttonEditar = new javax.swing.JButton();
+        buttonExcluir = new javax.swing.JButton();
+        buttonAtualizarLista = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -42,82 +52,75 @@ public class CursoListar extends javax.swing.JFrame {
             }
         });
 
-        imprimir.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        imprimir.setText("Homescreen");
-        imprimir.addActionListener(new java.awt.event.ActionListener() {
+        buttonProcurarCurso.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        buttonProcurarCurso.setText("Procurar Curso");
+        buttonProcurarCurso.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                imprimirActionPerformed(evt);
-            }
-        });
-
-        procurar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        procurar.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        procurar.setText("Procurar...");
-        procurar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                procurarActionPerformed(evt);
+                buttonProcurarCursoActionPerformed(evt);
             }
         });
 
         tabelaExibir.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+
             },
             new String [] {
-                "ID", "Nome", "Curso", "Ativo", "Remover", "Editar"
+                "ID", "Nome", "Curso", "Ativo"
             }
         ) {
-            Class[] types = new Class [] {
-                java.lang.Long.class, java.lang.String.class, java.lang.String.class, java.lang.Boolean.class, java.lang.Object.class, java.lang.Object.class
-            };
             boolean[] canEdit = new boolean [] {
-                true, true, true, true, false, false
+                false, false, false, false
             };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
         });
+        tabelaExibir.setToolTipText("");
         scrollTabelaDeInfo.setViewportView(tabelaExibir);
+
+        buttonEditar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        buttonEditar.setText("Editar");
+        buttonEditar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonEditarActionPerformed(evt);
+            }
+        });
+
+        buttonExcluir.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        buttonExcluir.setText("Excluir");
+        buttonExcluir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonExcluirActionPerformed(evt);
+            }
+        });
+
+        buttonAtualizarLista.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        buttonAtualizarLista.setText("Atualizar Lista");
+        buttonAtualizarLista.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonAtualizarListaActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
                 .addGap(34, 34, 34)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(scrollTabelaDeInfo)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(scrollTabelaDeInfo, javax.swing.GroupLayout.PREFERRED_SIZE, 578, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(procurar, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(buttonProcurarCurso, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(178, 178, 178)
-                        .addComponent(cadastrarNovoCurso, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 178, Short.MAX_VALUE)
-                        .addComponent(imprimir, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(34, 34, 34))
+                        .addComponent(cadastrarNovoCurso, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(buttonEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(buttonExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(buttonAtualizarLista, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(23, 23, 23))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -125,35 +128,84 @@ public class CursoListar extends javax.swing.JFrame {
                 .addGap(23, 23, 23)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cadastrarNovoCurso, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(imprimir, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(procurar, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 43, Short.MAX_VALUE)
-                .addComponent(scrollTabelaDeInfo, javax.swing.GroupLayout.PREFERRED_SIZE, 346, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(buttonProcurarCurso, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(buttonAtualizarLista, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 44, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(scrollTabelaDeInfo, javax.swing.GroupLayout.PREFERRED_SIZE, 346, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(buttonEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(48, 48, 48)
+                        .addComponent(buttonExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(42, 42, 42))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    public void readJTable(){// Metodo responsavel por atualizar a exibição do curso na tablea
+        
+        DefaultTableModel model = (DefaultTableModel) tabelaExibir.getModel();// Exibe o modelo
+        
+        model.setRowCount(0);// Seta nessa linha o modelo
+        
+        CategoriaDAO cdao = new CategoriaDAO(); // Instancia o local onde sera atualizado
+        
+        for(Curso c : cdao.read()){// Adiciona na tabela já existente 
+            
+            model.addRow(new Object[]{
+               c.getId(),
+               c.getNome(),
+               c.getCodigoCurso(),
+               c.getAtivo()
+            });
+
+        }
+            
+    }
+      
+    // Botão para cadastrar novo curso
     private void cadastrarNovoCursoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cadastrarNovoCursoActionPerformed
         // TODO add your handling code here:
         
+        // Abre a tela ao apertar o botão
         CursoAdicionar cursoAdicionar = new CursoAdicionar();
-        //this.dispose();  Essa linha faz fechar a tela assim que abrir a outra
         cursoAdicionar.setVisible(true);
     }//GEN-LAST:event_cadastrarNovoCursoActionPerformed
 
-    private void imprimirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_imprimirActionPerformed
+    private void buttonProcurarCursoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonProcurarCursoActionPerformed
         // TODO add your handling code here:
         
+        // Abre a tela ao apertar o botão
+        CursoProcurar cursoProcurar = new CursoProcurar();   
+        cursoProcurar.setVisible(true);
         
-    }//GEN-LAST:event_imprimirActionPerformed
+    }//GEN-LAST:event_buttonProcurarCursoActionPerformed
 
-    private void procurarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_procurarActionPerformed
-         // TODO add your handling code here:
-         
-         
-    }//GEN-LAST:event_procurarActionPerformed
+    private void buttonEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonEditarActionPerformed
+        // TODO add your handling code here:
+        
+        // Abre a tela ao apertar o botão
+        CursoEditar cursoEditar = new CursoEditar();
+        cursoEditar.setVisible(true);
+    }//GEN-LAST:event_buttonEditarActionPerformed
+
+    private void buttonExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonExcluirActionPerformed
+        // TODO add your handling code here:  
+        
+        // Abre a tela ao apertar o botão
+        CursoExcluir cursoExcluir = new CursoExcluir();
+        cursoExcluir.setVisible(true);
+        
+        readJTable();
+    }//GEN-LAST:event_buttonExcluirActionPerformed
+
+    private void buttonAtualizarListaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAtualizarListaActionPerformed
+        // TODO add your handling code here:
+        
+        // Atualiza a lista, exibe ela atualizada
+        readJTable();
+    }//GEN-LAST:event_buttonAtualizarListaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -191,9 +243,11 @@ public class CursoListar extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton buttonAtualizarLista;
+    private javax.swing.JButton buttonEditar;
+    private javax.swing.JButton buttonExcluir;
+    private javax.swing.JButton buttonProcurarCurso;
     private javax.swing.JButton cadastrarNovoCurso;
-    private javax.swing.JButton imprimir;
-    private javax.swing.JTextField procurar;
     private javax.swing.JScrollPane scrollTabelaDeInfo;
     private javax.swing.JTable tabelaExibir;
     // End of variables declaration//GEN-END:variables

@@ -39,6 +39,11 @@ public class Curso {
     }
     
     
+    @Override
+    public String toString(){
+        return "Nome: " + getNome() + " Codigo: " + getCodigoCurso() + " Ativo: " + getAtivo();
+    }
+    
     
     public Long getId(){
         return id;

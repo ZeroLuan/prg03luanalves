@@ -4,17 +4,21 @@
  */
 package br.com.ifba.curso.view;
 
+import br.com.ifba.curso.entity.Curso;
+import br.com.ifba.curso.model.dao.CategoriaDAO;
+import javax.swing.JFrame;
 /**
  *
  * @author a1591
  */
 public class CursoAdicionar extends javax.swing.JFrame {
-
+    
     /**
      * Creates new form CursoAdicionar
      */
     public CursoAdicionar() {
         initComponents();
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE); // Fechar esta janela sem afetar as outras
     }
 
     /**
@@ -33,8 +37,6 @@ public class CursoAdicionar extends javax.swing.JFrame {
         textFildCurso = new javax.swing.JTextField();
         atividadeAluno = new javax.swing.JLabel();
         checkBoxAtividade = new javax.swing.JCheckBox();
-        iDAluno = new javax.swing.JLabel();
-        textFildiD = new javax.swing.JTextField();
         enviarAdicaoDeCurso = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -52,7 +54,7 @@ public class CursoAdicionar extends javax.swing.JFrame {
         });
 
         nomeCurso.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        nomeCurso.setText("Digite o Curso : ");
+        nomeCurso.setText("Abreviação Nome:");
 
         textFildCurso.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         textFildCurso.addActionListener(new java.awt.event.ActionListener() {
@@ -71,18 +73,13 @@ public class CursoAdicionar extends javax.swing.JFrame {
             }
         });
 
-        iDAluno.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        iDAluno.setText("Digite o ID :");
-
-        textFildiD.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        textFildiD.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                textFildiDActionPerformed(evt);
-            }
-        });
-
         enviarAdicaoDeCurso.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         enviarAdicaoDeCurso.setText("Enviar");
+        enviarAdicaoDeCurso.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                enviarAdicaoDeCursoActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -98,25 +95,19 @@ public class CursoAdicionar extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(nomeCurso)
-                                            .addComponent(nomeAluno))
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(textFildNome, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(textFildCurso, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(atividadeAluno)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(checkBoxAtividade, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addGap(55, 55, 55)
-                                .addComponent(teste))
+                                    .addComponent(nomeCurso)
+                                    .addComponent(nomeAluno))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(textFildNome, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(textFildCurso, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(iDAluno)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(textFildiD, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap(66, Short.MAX_VALUE))
+                                .addComponent(atividadeAluno)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(checkBoxAtividade, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(55, 55, 55)
+                        .addComponent(teste)))
+                .addContainerGap(54, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -134,22 +125,18 @@ public class CursoAdicionar extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(nomeCurso)
                             .addComponent(textFildCurso, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(10, 10, 10)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(iDAluno, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(textFildiD, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(14, 14, 14)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(atividadeAluno)
                     .addComponent(checkBoxAtividade))
                 .addGap(33, 33, 33)
                 .addComponent(enviarAdicaoDeCurso, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(43, Short.MAX_VALUE))
+                .addContainerGap(74, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    
     private void textFildNomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textFildNomeActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_textFildNomeActionPerformed
@@ -162,10 +149,29 @@ public class CursoAdicionar extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_checkBoxAtividadeActionPerformed
 
-    private void textFildiDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textFildiDActionPerformed
+    private void enviarAdicaoDeCursoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_enviarAdicaoDeCursoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_textFildiDActionPerformed
+        
+        String nome = textFildNome.getText(); // Pega o texto digitado
+        String abreviacaoCurso = textFildCurso.getText();
+        Boolean atividade = checkBoxAtividade.isSelected();
+        
+        System.out.println("\n Nome do Aluno: " + nome + 
+                           "\n Abreviacao: " + abreviacaoCurso + 
+                           "\n Atividade do Curso: " + atividade);
+        
+        Curso curso = new Curso();
+        
+        curso.setNome(nome);
+        curso.setCodigoCurso(abreviacaoCurso);
+        curso.setAtivo(atividade);
+        CategoriaDAO dao = new CategoriaDAO();
+        
+        dao.save(curso);
+               
+    }//GEN-LAST:event_enviarAdicaoDeCursoActionPerformed
 
+    
     /**
      * @param args the command line arguments
      */
@@ -205,12 +211,10 @@ public class CursoAdicionar extends javax.swing.JFrame {
     private javax.swing.JLabel atividadeAluno;
     private javax.swing.JCheckBox checkBoxAtividade;
     private javax.swing.JButton enviarAdicaoDeCurso;
-    private javax.swing.JLabel iDAluno;
     private javax.swing.JLabel nomeAluno;
     private javax.swing.JLabel nomeCurso;
     private javax.swing.JLabel teste;
     private javax.swing.JTextField textFildCurso;
     private javax.swing.JTextField textFildNome;
-    private javax.swing.JTextField textFildiD;
     // End of variables declaration//GEN-END:variables
 }
