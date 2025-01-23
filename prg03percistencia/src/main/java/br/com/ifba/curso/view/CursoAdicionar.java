@@ -5,8 +5,9 @@
 package br.com.ifba.curso.view;
 
 import br.com.ifba.curso.entity.Curso;
-import br.com.ifba.curso.model.dao.CategoriaDAO;
+import br.com.ifba.curso.model.dao.CursoDAO;
 import javax.swing.JFrame;
+import javax.swing.table.DefaultTableModel;
 /**
  *
  * @author a1591
@@ -18,8 +19,28 @@ public class CursoAdicionar extends javax.swing.JFrame {
      */
     public CursoAdicionar() {
         initComponents();
-        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE); // Fechar esta janela sem afetar as outras
     }
+  
+    private CursoListar listarFrame; // Referência para o frame de listagem
+
+    public CursoAdicionar(CursoListar listarFrame) {
+        initComponents(); // Inicializa os componentes da interface gráfica
+
+        this.listarFrame = listarFrame; // Recebe o frame responsável pela listagem
+        
+        // Adiciona um listener para detectar o fechamento da janela
+        this.addWindowListener(new java.awt.event.WindowAdapter() {
+            @Override
+            public void windowClosed(java.awt.event.WindowEvent evt) {
+                if (listarFrame != null) {
+                    listarFrame.readJTable(); // Atualiza a tabela no frame de listagem
+                }
+            }
+        });
+
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE); // Fecha esta janela sem encerrar o programa
+    }
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -152,23 +173,20 @@ public class CursoAdicionar extends javax.swing.JFrame {
     private void enviarAdicaoDeCursoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_enviarAdicaoDeCursoActionPerformed
         // TODO add your handling code here:
         
-        String nome = textFildNome.getText(); // Pega o texto digitado
-        String abreviacaoCurso = textFildCurso.getText();
-        Boolean atividade = checkBoxAtividade.isSelected();
-        
-        System.out.println("\n Nome do Aluno: " + nome + 
-                           "\n Abreviacao: " + abreviacaoCurso + 
-                           "\n Atividade do Curso: " + atividade);
-        
+        // Cria um novo objeto do tipo Curso
         Curso curso = new Curso();
         
-        curso.setNome(nome);
-        curso.setCodigoCurso(abreviacaoCurso);
-        curso.setAtivo(atividade);
-        CategoriaDAO dao = new CategoriaDAO();
+        // Define os atributos do curso com os valores obtidos
+        curso.setNome(textFildNome.getText()); // Define o nome do curso
+        curso.setCodigoCurso(textFildCurso.getText()); // Define a abreviação do curso
+        curso.setAtivo(checkBoxAtividade.isSelected()); // Define o estado de atividade do curso
+
+        // Cria uma instância de CursoDAO para interagir com o banco de dados
+        CursoDAO dao = new CursoDAO();
         
-        dao.save(curso);
-               
+        // Salva o curso no banco de dados
+        dao.save(curso);  
+
     }//GEN-LAST:event_enviarAdicaoDeCursoActionPerformed
 
     
@@ -202,7 +220,8 @@ public class CursoAdicionar extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new CursoAdicionar().setVisible(true);
+                CursoListar listarFrame = new CursoListar();
+                new CursoAdicionar(listarFrame).setVisible(true);
             }
         });
     }

@@ -13,10 +13,15 @@ import java.util.List;
  *
  * @author a1591
  */
-public class CategoriaDAO {
+public class CursoDAO {
     
     // Salva um curso no banco de dados
     public Curso save(Curso curso){
+        
+        if (curso == null) {
+            throw new IllegalArgumentException("O curso não pode ser nulo");
+        }
+        
         EntityManager entityManager = new ConnectionFactory().getConnection();
         
         try {
@@ -51,6 +56,7 @@ public class CategoriaDAO {
     
     // Busca um curso pelo ID no banco de dados
     public Curso find(Long cursoID){
+        
         EntityManager entityManager = new ConnectionFactory().getConnection();
         Curso cursoEncontrado = null;
 

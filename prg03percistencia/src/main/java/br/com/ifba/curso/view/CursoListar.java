@@ -5,7 +5,7 @@
 package br.com.ifba.curso.view;
 
 import br.com.ifba.curso.entity.Curso;
-import br.com.ifba.curso.model.dao.CategoriaDAO;
+import br.com.ifba.curso.model.dao.CursoDAO;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -149,7 +149,7 @@ public class CursoListar extends javax.swing.JFrame {
         
         model.setRowCount(0);// Seta nessa linha o modelo
         
-        CategoriaDAO cdao = new CategoriaDAO(); // Instancia o local onde sera atualizado
+        CursoDAO cdao = new CursoDAO(); // Instancia o local onde sera atualizado
         
         for(Curso c : cdao.read()){// Adiciona na tabela já existente 
             
@@ -159,9 +159,7 @@ public class CursoListar extends javax.swing.JFrame {
                c.getCodigoCurso(),
                c.getAtivo()
             });
-
-        }
-            
+        }          
     }
       
     // Botão para cadastrar novo curso
@@ -169,7 +167,7 @@ public class CursoListar extends javax.swing.JFrame {
         // TODO add your handling code here:
         
         // Abre a tela ao apertar o botão
-        CursoAdicionar cursoAdicionar = new CursoAdicionar();
+        CursoAdicionar cursoAdicionar = new CursoAdicionar(this);
         cursoAdicionar.setVisible(true);
     }//GEN-LAST:event_cadastrarNovoCursoActionPerformed
 
@@ -178,15 +176,14 @@ public class CursoListar extends javax.swing.JFrame {
         
         // Abre a tela ao apertar o botão
         CursoProcurar cursoProcurar = new CursoProcurar();   
-        cursoProcurar.setVisible(true);
-        
+        cursoProcurar.setVisible(true);      
     }//GEN-LAST:event_buttonProcurarCursoActionPerformed
 
     private void buttonEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonEditarActionPerformed
         // TODO add your handling code here:
         
         // Abre a tela ao apertar o botão
-        CursoEditar cursoEditar = new CursoEditar();
+        CursoEditar cursoEditar = new CursoEditar(this);
         cursoEditar.setVisible(true);
     }//GEN-LAST:event_buttonEditarActionPerformed
 
@@ -195,9 +192,7 @@ public class CursoListar extends javax.swing.JFrame {
         
         // Abre a tela ao apertar o botão
         CursoExcluir cursoExcluir = new CursoExcluir();
-        cursoExcluir.setVisible(true);
-        
-        readJTable();
+        cursoExcluir.setVisible(true);    
     }//GEN-LAST:event_buttonExcluirActionPerformed
 
     private void buttonAtualizarListaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAtualizarListaActionPerformed

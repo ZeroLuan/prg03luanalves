@@ -5,7 +5,7 @@
 package br.com.ifba.curso.view;
 
 import br.com.ifba.curso.entity.Curso;
-import br.com.ifba.curso.model.dao.CategoriaDAO;
+import br.com.ifba.curso.model.dao.CursoDAO;
 import javax.swing.JFrame;
 
 /**
@@ -18,8 +18,7 @@ public class CursoProcurar extends javax.swing.JFrame {
      * Creates new form CursoProcurar
      */
     public CursoProcurar() {
-        initComponents();
-        
+        initComponents();       
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE); // Fechar esta janela sem afetar as outras
     }
 
@@ -108,19 +107,13 @@ public class CursoProcurar extends javax.swing.JFrame {
 
     private void buttonProcurarCursoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonProcurarCursoActionPerformed
         // TODO add your handling code here:
-
-        // Responsavel por pegar o ID
-        String numId = textFildFindID.getText();
-        Long numeroID = Long.parseLong(numId);
-        
-        System.out.println("\n Codigo Curso: " + numeroID);
           
         // Recebe o curso encontrado
-        CategoriaDAO dao = new CategoriaDAO();
+        CursoDAO dao = new CursoDAO();
         Curso cursoEncontrado = new Curso();
         
         // Recebe o curso pelo ID
-        cursoEncontrado = dao.find(numeroID);
+        cursoEncontrado = dao.find(Long.parseLong(textFildFindID.getText()));
         
         // Exibe as informaçãoes do Curso
         jLableStatusExibir.setText(cursoEncontrado.toString());

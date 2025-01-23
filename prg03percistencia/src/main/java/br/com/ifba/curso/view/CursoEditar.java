@@ -5,7 +5,7 @@
 package br.com.ifba.curso.view;
 
 import br.com.ifba.curso.entity.Curso;
-import br.com.ifba.curso.model.dao.CategoriaDAO;
+import br.com.ifba.curso.model.dao.CursoDAO;
 import javax.swing.JFrame;
 
 /**
@@ -19,7 +19,26 @@ public class CursoEditar extends javax.swing.JFrame {
      */
     public CursoEditar() {
         initComponents();
-        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE); // Fechar esta janela sem afetar as outras
+    }
+    
+    private CursoListar listarFrame; // Referência para o frame de listagem
+    
+    public CursoEditar(CursoListar listarFrame) {
+        initComponents(); // Inicializa os componentes da interface gráfica
+
+        this.listarFrame = listarFrame; // Recebe o frame responsável pela listagem
+        
+        // Adiciona um listener para detectar o fechamento da janela
+        this.addWindowListener(new java.awt.event.WindowAdapter() {
+            @Override
+            public void windowClosed(java.awt.event.WindowEvent evt) {
+                if (listarFrame != null) {
+                    listarFrame.readJTable(); // Atualiza a tabela no frame de listagem
+                }
+            }
+        });
+
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE); // Fecha esta janela sem encerrar o programa
     }
 
     /**
@@ -173,26 +192,24 @@ public class CursoEditar extends javax.swing.JFrame {
     private void jButtonAtualizarCursoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAtualizarCursoActionPerformed
         // TODO add your handling code here:
         
-        String numId = textFildID.getText();
-        Long numeroID = Long.parseLong(numId);
-        String nome = textFildNomeAtualizar.getText(); // Pega o texto digitado
-        String abreviacaoCurso = textFildCursoAtualiar.getText();
-        Boolean atividade = checkBoxAtividadeAtualizar.isSelected();
-        
-        System.out.println("\n Nome do Aluno: " + nome + 
-                           "\n Abreviacao: " + abreviacaoCurso + 
-                           "\n Codigo Curso: " + numeroID+
-                           "\n Atividade do Curso: " + atividade);
-        
+        // Instancia um objeto de Curso e CursoDAO
         Curso curso = new Curso();
-        CategoriaDAO categoriaDAO = new CategoriaDAO();
+        CursoDAO categoriaDAO = new CursoDAO();
         
-        curso = categoriaDAO.find(numeroID);
-        
-        curso.setNome(nome);
-        curso.setCodigoCurso(abreviacaoCurso);
-        curso.setAtivo(atividade);
-        
+        // Obtém o ID digitado no campo de texto e converte para Long
+        //String numId = textFildID.getText();
+        //Long numeroID = Long.parseLong(numId);
+        // Logo a baixo tem outra forma de se fazer a mesma coisa
+
+        // Busca o curso no banco de dados pelo ID
+        curso = categoriaDAO.find(Long.parseLong(textFildID.getText()));
+
+        // Atualiza os atributos do curso com os novos valores
+        curso.setNome(textFildNomeAtualizar.getText()); // Atualiza o nome do curso
+        curso.setCodigoCurso(textFildCursoAtualiar.getText()); // Atualiza a abreviação do curso
+        curso.setAtivo(checkBoxAtividadeAtualizar.isSelected()); // Atualiza o estado de atividade do curso
+
+        // Salva as alterações no banco de dados
         categoriaDAO.update(curso);
     }//GEN-LAST:event_jButtonAtualizarCursoActionPerformed
 
@@ -226,7 +243,8 @@ public class CursoEditar extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new CursoEditar().setVisible(true);
+                CursoListar listarFrame = new CursoListar();
+                new CursoEditar(listarFrame).setVisible(true);
             }
         });
     }

@@ -14,10 +14,12 @@ import jakarta.persistence.Persistence;
  */
 public class ConnectionFactory {
     
+    // Cria uma única instância de EntityManagerFactory para gerenciar conexões
     private static EntityManagerFactory entityManagerFactory = 
                         Persistence.createEntityManagerFactory("gerenciamento_curso");
     
-    public EntityManager getConnection(){
+    // Retorna uma nova instância de EntityManager para operações no banco de dados
+    public EntityManager getConnection() {
         return entityManagerFactory.createEntityManager(); 
     }
     

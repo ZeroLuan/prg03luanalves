@@ -5,7 +5,7 @@
 package br.com.ifba.curso.view;
 
 import br.com.ifba.curso.entity.Curso;
-import br.com.ifba.curso.model.dao.CategoriaDAO;
+import br.com.ifba.curso.model.dao.CursoDAO;
 import javax.swing.JFrame;
 
 /**
@@ -85,22 +85,24 @@ public class CursoExcluir extends javax.swing.JFrame {
 
     private void textFildFindIDExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textFildFindIDExcluirActionPerformed
         // TODO add your handling code here:
-
     }//GEN-LAST:event_textFildFindIDExcluirActionPerformed
 
     private void buttonExcluirCursoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonExcluirCursoActionPerformed
         // TODO add your handling code here:
 
-        String numId = textFildFindIDExcluir.getText();
-        Long numeroID = Long.parseLong(numId);
-
-        System.out.println("\n Codigo Curso: " + numeroID);
-
-        CategoriaDAO dao = new CategoriaDAO();
+        // Instancia os objetos onde vai ser ultilizado o metodo de remover
+        CursoDAO dao = new CursoDAO();
         Curso cursoEncontrado = new Curso();
+        
+        // Pega o ID
+        //String numId = textFildFindIDExcluir.getText();
+        //Long numeroID = Long.parseLong(numId);
+        // Logo a baixo tem outra forma de se fazer a mesma coisa
 
-        cursoEncontrado = dao.find(numeroID);
+        // Procura o curso pelo ID
+        cursoEncontrado = dao.find(Long.parseLong(textFildFindIDExcluir.getText()));
 
+        // Remove o curso
         dao.remove(cursoEncontrado);
 
     }//GEN-LAST:event_buttonExcluirCursoActionPerformed
