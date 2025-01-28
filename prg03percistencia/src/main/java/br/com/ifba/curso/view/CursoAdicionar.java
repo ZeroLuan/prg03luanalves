@@ -4,10 +4,11 @@
  */
 package br.com.ifba.curso.view;
 
+import br.com.curso.dao.CursoDao;
+import br.com.curso.dao.CursoIDao;
 import br.com.ifba.curso.entity.Curso;
-import br.com.ifba.curso.model.dao.CursoDAO;
 import javax.swing.JFrame;
-import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author a1591
@@ -25,6 +26,7 @@ public class CursoAdicionar extends javax.swing.JFrame {
 
     public CursoAdicionar(CursoListar listarFrame) {
         initComponents(); // Inicializa os componentes da interface gráfica
+        this.setLocationRelativeTo(null); // Centraliza a janela
 
         this.listarFrame = listarFrame; // Recebe o frame responsável pela listagem
         
@@ -53,12 +55,12 @@ public class CursoAdicionar extends javax.swing.JFrame {
 
         teste = new javax.swing.JLabel();
         nomeAluno = new javax.swing.JLabel();
-        textFildNome = new javax.swing.JTextField();
+        textFieldNome = new javax.swing.JTextField();
         nomeCurso = new javax.swing.JLabel();
-        textFildCurso = new javax.swing.JTextField();
+        textFieldCodigoCurso = new javax.swing.JTextField();
         atividadeAluno = new javax.swing.JLabel();
-        checkBoxAtividade = new javax.swing.JCheckBox();
-        enviarAdicaoDeCurso = new javax.swing.JButton();
+        checkBoxAtivo = new javax.swing.JCheckBox();
+        btnSalvar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -67,38 +69,23 @@ public class CursoAdicionar extends javax.swing.JFrame {
         nomeAluno.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         nomeAluno.setText("Digite o Nome : ");
 
-        textFildNome.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        textFildNome.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                textFildNomeActionPerformed(evt);
-            }
-        });
+        textFieldNome.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
         nomeCurso.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         nomeCurso.setText("Abreviação Nome:");
 
-        textFildCurso.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        textFildCurso.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                textFildCursoActionPerformed(evt);
-            }
-        });
+        textFieldCodigoCurso.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
         atividadeAluno.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         atividadeAluno.setText("Ativo/Desativo : ");
 
-        checkBoxAtividade.setText("Atividade");
-        checkBoxAtividade.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                checkBoxAtividadeActionPerformed(evt);
-            }
-        });
+        checkBoxAtivo.setText("Atividade");
 
-        enviarAdicaoDeCurso.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        enviarAdicaoDeCurso.setText("Enviar");
-        enviarAdicaoDeCurso.addActionListener(new java.awt.event.ActionListener() {
+        btnSalvar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        btnSalvar.setText("Salvar");
+        btnSalvar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                enviarAdicaoDeCursoActionPerformed(evt);
+                btnSalvarActionPerformed(evt);
             }
         });
 
@@ -110,7 +97,7 @@ public class CursoAdicionar extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(224, 224, 224)
-                        .addComponent(enviarAdicaoDeCurso, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(btnSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(175, 175, 175)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -120,12 +107,12 @@ public class CursoAdicionar extends javax.swing.JFrame {
                                     .addComponent(nomeAluno))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(textFildNome, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(textFildCurso, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addComponent(textFieldNome, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(textFieldCodigoCurso, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(atividadeAluno)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(checkBoxAtividade, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(checkBoxAtivo, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(55, 55, 55)
                         .addComponent(teste)))
                 .addContainerGap(54, Short.MAX_VALUE))
@@ -141,53 +128,54 @@ public class CursoAdicionar extends javax.swing.JFrame {
                         .addGap(55, 55, 55)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(nomeAluno)
-                            .addComponent(textFildNome, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(textFieldNome, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(nomeCurso)
-                            .addComponent(textFildCurso, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(textFieldCodigoCurso, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(atividadeAluno)
-                    .addComponent(checkBoxAtividade))
+                    .addComponent(checkBoxAtivo))
                 .addGap(33, 33, 33)
-                .addComponent(enviarAdicaoDeCurso, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(74, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
     
-    private void textFildNomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textFildNomeActionPerformed
+    private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_textFildNomeActionPerformed
-
-    private void textFildCursoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textFildCursoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_textFildCursoActionPerformed
-
-    private void checkBoxAtividadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkBoxAtividadeActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_checkBoxAtividadeActionPerformed
-
-    private void enviarAdicaoDeCursoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_enviarAdicaoDeCursoActionPerformed
-        // TODO add your handling code here:
+        
+        if (textFieldNome.getText().isEmpty() || textFieldCodigoCurso.getText().isEmpty()) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Todos os campos devem ser preenchidos!", 
+                                                  "Erro", javax.swing.JOptionPane.ERROR_MESSAGE);
+            return; // Interrompe o método
+        }
         
         // Cria um novo objeto do tipo Curso
         Curso curso = new Curso();
         
         // Define os atributos do curso com os valores obtidos
-        curso.setNome(textFildNome.getText()); // Define o nome do curso
-        curso.setCodigoCurso(textFildCurso.getText()); // Define a abreviação do curso
-        curso.setAtivo(checkBoxAtividade.isSelected()); // Define o estado de atividade do curso
-
-        // Cria uma instância de CursoDAO para interagir com o banco de dados
-        CursoDAO dao = new CursoDAO();
+        curso.setNome(textFieldNome.getText()); // Define o nome do curso
+        curso.setCodigoCurso(textFieldCodigoCurso.getText()); // Define a abreviação do curso
+        curso.setAtivo(checkBoxAtivo.isSelected()); // Define o estado de atividade do curso
         
-        // Salva o curso no banco de dados
-        dao.save(curso);  
-
-    }//GEN-LAST:event_enviarAdicaoDeCursoActionPerformed
+        CursoIDao cursoDao = new CursoDao();
+        
+        // Salva no banco
+        try {
+            cursoDao.save(curso);
+            
+            javax.swing.JOptionPane.showMessageDialog(this, "Curso adicionado com sucesso!", 
+                                                  "Sucesso", javax.swing.JOptionPane.INFORMATION_MESSAGE);
+            this.dispose(); // Fecha a janela atual após o sucesso
+        } catch (Exception e) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Erro ao salvar curso: " + e.getMessage(), 
+                                                  "Erro", javax.swing.JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_btnSalvarActionPerformed
 
     
     /**
@@ -228,12 +216,12 @@ public class CursoAdicionar extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel atividadeAluno;
-    private javax.swing.JCheckBox checkBoxAtividade;
-    private javax.swing.JButton enviarAdicaoDeCurso;
+    private javax.swing.JButton btnSalvar;
+    private javax.swing.JCheckBox checkBoxAtivo;
     private javax.swing.JLabel nomeAluno;
     private javax.swing.JLabel nomeCurso;
     private javax.swing.JLabel teste;
-    private javax.swing.JTextField textFildCurso;
-    private javax.swing.JTextField textFildNome;
+    private javax.swing.JTextField textFieldCodigoCurso;
+    private javax.swing.JTextField textFieldNome;
     // End of variables declaration//GEN-END:variables
 }

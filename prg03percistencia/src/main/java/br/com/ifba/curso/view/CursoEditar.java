@@ -4,8 +4,9 @@
  */
 package br.com.ifba.curso.view;
 
+import br.com.curso.dao.CursoDao;
+import br.com.curso.dao.CursoIDao;
 import br.com.ifba.curso.entity.Curso;
-import br.com.ifba.curso.model.dao.CursoDAO;
 import javax.swing.JFrame;
 
 /**
@@ -25,6 +26,7 @@ public class CursoEditar extends javax.swing.JFrame {
     
     public CursoEditar(CursoListar listarFrame) {
         initComponents(); // Inicializa os componentes da interface gráfica
+        this.setLocationRelativeTo(null); // Centraliza a janela
 
         this.listarFrame = listarFrame; // Recebe o frame responsável pela listagem
         
@@ -67,31 +69,16 @@ public class CursoEditar extends javax.swing.JFrame {
         nomeAlunoAtualizar.setText("Novo Nome : ");
 
         textFildNomeAtualizar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        textFildNomeAtualizar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                textFildNomeAtualizarActionPerformed(evt);
-            }
-        });
 
         nomeCursoAtualizar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         nomeCursoAtualizar.setText("Nova Abreviação:");
 
         textFildCursoAtualiar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        textFildCursoAtualiar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                textFildCursoAtualiarActionPerformed(evt);
-            }
-        });
 
         atividadeAlunoAtualizar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         atividadeAlunoAtualizar.setText("Novo Status");
 
         checkBoxAtividadeAtualizar.setText("Atividade");
-        checkBoxAtividadeAtualizar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                checkBoxAtividadeAtualizarActionPerformed(evt);
-            }
-        });
 
         jLableStausAtualizacao.setText("Status");
 
@@ -99,11 +86,6 @@ public class CursoEditar extends javax.swing.JFrame {
         lableNumeroID.setText("Informe o ID para Atualizar:");
 
         textFildID.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        textFildID.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                textFildIDActionPerformed(evt);
-            }
-        });
 
         jButtonAtualizarCurso.setText("Atualizar");
         jButtonAtualizarCurso.addActionListener(new java.awt.event.ActionListener() {
@@ -173,36 +155,14 @@ public class CursoEditar extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void textFildNomeAtualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textFildNomeAtualizarActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_textFildNomeAtualizarActionPerformed
-
-    private void textFildCursoAtualiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textFildCursoAtualiarActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_textFildCursoAtualiarActionPerformed
-
-    private void checkBoxAtividadeAtualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkBoxAtividadeAtualizarActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_checkBoxAtividadeAtualizarActionPerformed
-
-    private void textFildIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textFildIDActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_textFildIDActionPerformed
-
     private void jButtonAtualizarCursoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAtualizarCursoActionPerformed
         // TODO add your handling code here:
-        
-        // Instancia um objeto de Curso e CursoDAO
+          
+        // Instancia um objeto de Curso e CursoDao
         Curso curso = new Curso();
-        CursoDAO categoriaDAO = new CursoDAO();
-        
-        // Obtém o ID digitado no campo de texto e converte para Long
-        //String numId = textFildID.getText();
-        //Long numeroID = Long.parseLong(numId);
-        // Logo a baixo tem outra forma de se fazer a mesma coisa
-
+        CursoIDao categoriaDAO = new CursoDao();
         // Busca o curso no banco de dados pelo ID
-        curso = categoriaDAO.find(Long.parseLong(textFildID.getText()));
+        curso = categoriaDAO.findById(Long.parseLong(textFildID.getText()));
 
         // Atualiza os atributos do curso com os novos valores
         curso.setNome(textFildNomeAtualizar.getText()); // Atualiza o nome do curso

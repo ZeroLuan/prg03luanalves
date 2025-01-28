@@ -4,14 +4,16 @@
  */
 package br.com.ifba.curso.view;
 
+import br.com.curso.dao.CursoDao;
+import br.com.curso.dao.CursoIDao;
 import br.com.ifba.curso.entity.Curso;
-import br.com.ifba.curso.model.dao.CursoDAO;
 import javax.swing.JFrame;
 
 /**
  *
  * @author a1591
  */
+
 public class CursoProcurar extends javax.swing.JFrame {
 
     /**
@@ -19,6 +21,7 @@ public class CursoProcurar extends javax.swing.JFrame {
      */
     public CursoProcurar() {
         initComponents();       
+        this.setLocationRelativeTo(null); // Centraliza a janela
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE); // Fechar esta janela sem afetar as outras
     }
 
@@ -43,11 +46,6 @@ public class CursoProcurar extends javax.swing.JFrame {
         iDAlunoFind.setText("Digite o ID :");
 
         textFildFindID.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        textFildFindID.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                textFildFindIDActionPerformed(evt);
-            }
-        });
 
         buttonProcurarCurso.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         buttonProcurarCurso.setText("Procurar");
@@ -100,24 +98,18 @@ public class CursoProcurar extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     
-    private void textFildFindIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textFildFindIDActionPerformed
-        // TODO add your handling code here:
-        
-    }//GEN-LAST:event_textFildFindIDActionPerformed
-
     private void buttonProcurarCursoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonProcurarCursoActionPerformed
         // TODO add your handling code here:
-          
+        
         // Recebe o curso encontrado
-        CursoDAO dao = new CursoDAO();
+        CursoIDao dao = new CursoDao();
         Curso cursoEncontrado = new Curso();
         
         // Recebe o curso pelo ID
-        cursoEncontrado = dao.find(Long.parseLong(textFildFindID.getText()));
+        cursoEncontrado = dao.findById(Long.parseLong(textFildFindID.getText()));
         
         // Exibe as informaçãoes do Curso
         jLableStatusExibir.setText(cursoEncontrado.toString());
-        
     }//GEN-LAST:event_buttonProcurarCursoActionPerformed
 
     /**

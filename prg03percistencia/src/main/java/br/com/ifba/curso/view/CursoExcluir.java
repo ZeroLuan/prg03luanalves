@@ -4,8 +4,9 @@
  */
 package br.com.ifba.curso.view;
 
+import br.com.curso.dao.CursoDao;
+import br.com.curso.dao.CursoIDao;
 import br.com.ifba.curso.entity.Curso;
-import br.com.ifba.curso.model.dao.CursoDAO;
 import javax.swing.JFrame;
 
 /**
@@ -19,7 +20,27 @@ public class CursoExcluir extends javax.swing.JFrame {
      */
     public CursoExcluir() {
         initComponents();
-        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE); // Fechar esta janela sem afetar as outras
+    }
+    
+    private CursoListar listarFrame; // Referência para o frame de listagem
+    
+    public CursoExcluir(CursoListar listarFrame) {
+        initComponents(); // Inicializa os componentes da interface gráfica
+        this.setLocationRelativeTo(null); // Centraliza a janela
+        
+        this.listarFrame = listarFrame; // Recebe o frame responsável pela listagem
+        
+        // Adiciona um listener para detectar o fechamento da janela
+        this.addWindowListener(new java.awt.event.WindowAdapter() {
+            @Override
+            public void windowClosed(java.awt.event.WindowEvent evt) {
+                if (listarFrame != null) {
+                    listarFrame.readJTable(); // Atualiza a tabela no frame de listagem
+                }
+            }
+        });
+
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE); // Fecha esta janela sem encerrar o programa
     }
 
     /**
@@ -41,11 +62,6 @@ public class CursoExcluir extends javax.swing.JFrame {
         iDAlunoExcluir.setText("Digite o ID :");
 
         textFildFindIDExcluir.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        textFildFindIDExcluir.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                textFildFindIDExcluirActionPerformed(evt);
-            }
-        });
 
         buttonExcluirCurso.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         buttonExcluirCurso.setText("Excluir");
@@ -72,39 +88,30 @@ public class CursoExcluir extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(53, 53, 53)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(buttonExcluirCurso, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(iDAlunoExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(textFildFindIDExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(textFildFindIDExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(buttonExcluirCurso, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(47, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void textFildFindIDExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textFildFindIDExcluirActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_textFildFindIDExcluirActionPerformed
-
     private void buttonExcluirCursoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonExcluirCursoActionPerformed
         // TODO add your handling code here:
-
+        
         // Instancia os objetos onde vai ser ultilizado o metodo de remover
-        CursoDAO dao = new CursoDAO();
+        CursoIDao dao = new CursoDao();
         Curso cursoEncontrado = new Curso();
         
-        // Pega o ID
-        //String numId = textFildFindIDExcluir.getText();
-        //Long numeroID = Long.parseLong(numId);
-        // Logo a baixo tem outra forma de se fazer a mesma coisa
-
         // Procura o curso pelo ID
-        cursoEncontrado = dao.find(Long.parseLong(textFildFindIDExcluir.getText()));
+        Curso cursoExcluir = dao.findById(Long.parseLong(textFildFindIDExcluir.getText()));
+        // Procura o curso pelo ID
 
         // Remove o curso
-        dao.remove(cursoEncontrado);
-
+        dao.delete(cursoExcluir);  
     }//GEN-LAST:event_buttonExcluirCursoActionPerformed
 
     /**
@@ -137,7 +144,8 @@ public class CursoExcluir extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new CursoExcluir().setVisible(true);
+                CursoListar listarFrame = new CursoListar();
+                new CursoExcluir(listarFrame).setVisible(true);
             }
         });
     }

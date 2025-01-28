@@ -109,9 +109,6 @@
           <Font name="Segoe UI" size="14" style="0"/>
         </Property>
       </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="textFildNomeAtualizarActionPerformed"/>
-      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="nomeCursoAtualizar">
       <Properties>
@@ -127,9 +124,6 @@
           <Font name="Segoe UI" size="14" style="0"/>
         </Property>
       </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="textFildCursoAtualiarActionPerformed"/>
-      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="atividadeAlunoAtualizar">
       <Properties>
@@ -143,9 +137,6 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Atividade"/>
       </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="checkBoxAtividadeAtualizarActionPerformed"/>
-      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="jLableStausAtualizacao">
       <Properties>
@@ -166,9 +157,6 @@
           <Font name="Segoe UI" size="14" style="0"/>
         </Property>
       </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="textFildIDActionPerformed"/>
-      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="jButtonAtualizarCurso">
       <Properties>

@@ -4,8 +4,10 @@
  */
 package br.com.ifba.curso.view;
 
+import br.com.curso.dao.CursoDao;
+import br.com.curso.dao.CursoIDao;
 import br.com.ifba.curso.entity.Curso;
-import br.com.ifba.curso.model.dao.CursoDAO;
+import java.util.List;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -21,6 +23,7 @@ public class CursoListar extends javax.swing.JFrame {
         initComponents();
         DefaultTableModel model = (DefaultTableModel) tabelaExibir.getModel(); // Gerenciar modelo da tabela
         
+        this.setLocationRelativeTo(null); // Centraliza a janela
         // Atualiza a pagina
         readJTable();
     }
@@ -145,13 +148,13 @@ public class CursoListar extends javax.swing.JFrame {
 
     public void readJTable(){// Metodo responsavel por atualizar a exibição do curso na tablea
         
-        DefaultTableModel model = (DefaultTableModel) tabelaExibir.getModel();// Exibe o modelo
+        CursoIDao cdao = new CursoDao(); // Instancia o local onde sera atualizado
+        List<Curso> cursos = cdao.findAll();
         
+        DefaultTableModel model = (DefaultTableModel) tabelaExibir.getModel();// Exibe o modelo  
         model.setRowCount(0);// Seta nessa linha o modelo
         
-        CursoDAO cdao = new CursoDAO(); // Instancia o local onde sera atualizado
-        
-        for(Curso c : cdao.read()){// Adiciona na tabela já existente 
+        for(Curso c : cursos){// Adiciona na tabela já existente 
             
             model.addRow(new Object[]{
                c.getId(),
@@ -159,7 +162,7 @@ public class CursoListar extends javax.swing.JFrame {
                c.getCodigoCurso(),
                c.getAtivo()
             });
-        }          
+        }  
     }
       
     // Botão para cadastrar novo curso
@@ -191,7 +194,7 @@ public class CursoListar extends javax.swing.JFrame {
         // TODO add your handling code here:  
         
         // Abre a tela ao apertar o botão
-        CursoExcluir cursoExcluir = new CursoExcluir();
+        CursoExcluir cursoExcluir = new CursoExcluir(this);
         cursoExcluir.setVisible(true);    
     }//GEN-LAST:event_buttonExcluirActionPerformed
 
@@ -232,7 +235,8 @@ public class CursoListar extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new CursoListar().setVisible(true);
+                CursoListar listarFrame = new CursoListar();
+                listarFrame.setVisible(true); // Certifique-se de mostrar o frame principal
             }
         });
     }
