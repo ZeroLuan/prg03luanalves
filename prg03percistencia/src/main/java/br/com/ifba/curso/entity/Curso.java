@@ -37,7 +37,7 @@ public class Curso extends PersistenceEntity implements Serializable{
       
     @Override
     public String toString(){
-        return "Nome: " + getNome() + " Codigo: " + getCodigoCurso() + " Ativo: " + getAtivo();
+        return "Nome: " + getNome() + "  Codigo: " + getCodigoCurso() + "  Ativo: " + getAtivo();
     }
       
     

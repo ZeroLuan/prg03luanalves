@@ -4,8 +4,8 @@
  */
 package br.com.ifba.curso.view;
 
-import br.com.curso.dao.CursoDao;
-import br.com.curso.dao.CursoIDao;
+import br.com.ifba.curso.controller.CursoController;
+import br.com.ifba.curso.controller.CursoIController;
 import br.com.ifba.curso.entity.Curso;
 import javax.swing.JFrame;
 
@@ -14,6 +14,8 @@ import javax.swing.JFrame;
  * @author a1591
  */
 public class CursoAdicionar extends javax.swing.JFrame {
+    
+    private final CursoIController cursoController = new CursoController();
     
     /**
      * Creates new form CursoAdicionar
@@ -154,19 +156,17 @@ public class CursoAdicionar extends javax.swing.JFrame {
             return; // Interrompe o método
         }
         
-        // Cria um novo objeto do tipo Curso
-        Curso curso = new Curso();
-        
-        // Define os atributos do curso com os valores obtidos
-        curso.setNome(textFieldNome.getText()); // Define o nome do curso
-        curso.setCodigoCurso(textFieldCodigoCurso.getText()); // Define a abreviação do curso
-        curso.setAtivo(checkBoxAtivo.isSelected()); // Define o estado de atividade do curso
-        
-        CursoIDao cursoDao = new CursoDao();
-        
         // Salva no banco
         try {
-            cursoDao.save(curso);
+            // Cria um novo objeto do tipo Curso
+            Curso curso = new Curso();
+        
+            // Define os atributos do curso com os valores obtidos
+            curso.setNome(textFieldNome.getText()); // Define o nome do curso
+            curso.setCodigoCurso(textFieldCodigoCurso.getText()); // Define a abreviação do curso
+            curso.setAtivo(checkBoxAtivo.isSelected()); // Define o estado de atividade do curso
+            
+            cursoController.save(curso);
             
             javax.swing.JOptionPane.showMessageDialog(this, "Curso adicionado com sucesso!", 
                                                   "Sucesso", javax.swing.JOptionPane.INFORMATION_MESSAGE);

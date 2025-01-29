@@ -4,10 +4,11 @@
  */
 package br.com.ifba.curso.view;
 
-import br.com.curso.dao.CursoDao;
-import br.com.curso.dao.CursoIDao;
+import br.com.ifba.curso.controller.CursoController;
+import br.com.ifba.curso.controller.CursoIController;
 import br.com.ifba.curso.entity.Curso;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -16,6 +17,8 @@ import javax.swing.JFrame;
 
 public class CursoProcurar extends javax.swing.JFrame {
 
+    private final CursoIController cursoController = new CursoController();
+    
     /**
      * Creates new form CursoProcurar
      */
@@ -101,12 +104,20 @@ public class CursoProcurar extends javax.swing.JFrame {
     private void buttonProcurarCursoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonProcurarCursoActionPerformed
         // TODO add your handling code here:
         
+        if(textFildFindID.getText().isEmpty()){
+            JOptionPane.showMessageDialog(
+                    null, 
+                    "PREENCHA TODOS OS CAMPOS\n", 
+                    "ERRO", 
+                    JOptionPane.ERROR_MESSAGE
+            );
+        }
+        
         // Recebe o curso encontrado
-        CursoIDao dao = new CursoDao();
         Curso cursoEncontrado = new Curso();
         
         // Recebe o curso pelo ID
-        cursoEncontrado = dao.findById(Long.parseLong(textFildFindID.getText()));
+        cursoEncontrado = cursoController.findById(Long.parseLong(textFildFindID.getText()));
         
         // Exibe as informaçãoes do Curso
         jLableStatusExibir.setText(cursoEncontrado.toString());

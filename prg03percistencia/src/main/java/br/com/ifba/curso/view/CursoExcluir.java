@@ -4,10 +4,11 @@
  */
 package br.com.ifba.curso.view;
 
-import br.com.curso.dao.CursoDao;
-import br.com.curso.dao.CursoIDao;
+import br.com.ifba.curso.controller.CursoController;
+import br.com.ifba.curso.controller.CursoIController;
 import br.com.ifba.curso.entity.Curso;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -15,6 +16,8 @@ import javax.swing.JFrame;
  */
 public class CursoExcluir extends javax.swing.JFrame {
 
+    private final CursoIController cursoController = new CursoController();
+    
     /**
      * Creates new form CursoExcluir
      */
@@ -102,16 +105,21 @@ public class CursoExcluir extends javax.swing.JFrame {
     private void buttonExcluirCursoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonExcluirCursoActionPerformed
         // TODO add your handling code here:
         
-        // Instancia os objetos onde vai ser ultilizado o metodo de remover
-        CursoIDao dao = new CursoDao();
-        Curso cursoEncontrado = new Curso();
+        if(textFildFindIDExcluir.getText().isEmpty()){
+            JOptionPane.showMessageDialog(
+                    null, 
+                    "PREENCHA TODOS OS CAMPOS\n", 
+                    "ERRO", 
+                    JOptionPane.ERROR_MESSAGE
+            );
+        }
         
         // Procura o curso pelo ID
-        Curso cursoExcluir = dao.findById(Long.parseLong(textFildFindIDExcluir.getText()));
-        // Procura o curso pelo ID
+        Curso cursoExcluir = cursoController.findById(Long.parseLong(textFildFindIDExcluir.getText()));
 
         // Remove o curso
-        dao.delete(cursoExcluir);  
+        cursoController.delete(cursoExcluir); 
+        
     }//GEN-LAST:event_buttonExcluirCursoActionPerformed
 
     /**
