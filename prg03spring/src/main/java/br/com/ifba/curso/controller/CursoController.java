@@ -6,16 +6,19 @@ package br.com.ifba.curso.controller;
 
 import br.com.ifba.curso.entity.Curso;
 import br.com.ifba.curso.service.CursoIService;
-import br.com.ifba.curso.service.CursoService;
 import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 
 /**
  *
  * @author a1591
  */
+@Controller
 public class CursoController implements CursoIController{
     
-    private final CursoIService cursoIService = new CursoService();
+    @Autowired
+    private CursoIService cursoIService;
 
     @Override
     public List <Curso> findAll() throws RuntimeException{

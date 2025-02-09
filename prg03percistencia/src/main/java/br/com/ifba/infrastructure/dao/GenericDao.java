@@ -17,7 +17,7 @@ import java.util.List;
  * 
  */
 
-@SuppressWarnings("unchecked")
+@SuppressWarnings("unchecked")// Fala que vai trabalhar com qualquer sub tipo de PersistenceEntity.
 public class GenericDao <Entity extends PersistenceEntity> implements GenericIDao<Entity> {  
 
     protected static EntityManager entityManager;
@@ -62,6 +62,7 @@ public class GenericDao <Entity extends PersistenceEntity> implements GenericIDa
         return entityManager.createQuery(("from " + getTypeClass().getName())).getResultList();
     }
     
+    // ? é o tipo coringa, ele object não é o supert tipo de todos os tipos, já "?" é o supertipo de todos os tipos
     protected Class<?> getTypeClass() {
         Class <?> clazz = (Class<?>) ((ParameterizedType) this.getClass().
                 getGenericSuperclass()).

@@ -4,18 +4,22 @@
  */
 package br.com.ifba.curso.service;
 
-import br.com.curso.dao.CursoDao;
-import br.com.curso.dao.CursoIDao;
+import br.com.ifba.curso.dao.CursoDao;
+import br.com.ifba.curso.dao.CursoIDao;
 import br.com.ifba.curso.entity.Curso;
 import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 /**
  *
  * @author a1591
  */
+@Service
 public class CursoService implements CursoIService{
 
-    private final CursoIDao cursoDao = new CursoDao();
+    @Autowired
+    private CursoIDao cursoDao;
     
     @Override
     public Curso save(Curso curso) throws RuntimeException{

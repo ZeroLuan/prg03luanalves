@@ -161,7 +161,7 @@ public class CursoEditar extends javax.swing.JFrame {
     private void jButtonAtualizarCursoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAtualizarCursoActionPerformed
         // TODO add your handling code here:
           
-        if(textFildNomeAtualizar.getText().isEmpty() || textFildNomeAtualizar.getText().isEmpty()) {
+        if(textFildNomeAtualizar.getText().isEmpty() || textFildCursoAtualiar.getText().isEmpty()) {
             JOptionPane.showMessageDialog(
                     null, 
                     "PREENCHA TODOS OS CAMPOS\n", 
@@ -178,7 +178,7 @@ public class CursoEditar extends javax.swing.JFrame {
 
             // Atualiza os atributos do curso com os novos valores
             curso.setNome(textFildNomeAtualizar.getText()); // Atualiza o nome do curso
-            curso.setCodigoCurso(textFildNomeAtualizar.getText()); // Atualiza a abreviação do curso
+            curso.setCodigoCurso(textFildCursoAtualiar.getText()); // Atualiza a abreviação do curso
             curso.setAtivo(checkBoxAtividadeAtualizar.isSelected()); // Atualiza o estado de atividade do curso
 
             // Salva as alterações no banco de dados

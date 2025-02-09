@@ -20,15 +20,13 @@ import java.io.Serializable;
 public class Curso extends PersistenceEntity implements Serializable{
     
     @Column(name = "nome", nullable = false)
-    private String nome; 
+    private String nome;
     
     @Column(name = "codigo_curso", nullable = false, unique = true)
     private String codigoCurso;
     
     @Column(name = "ativo")
     private boolean ativo;
-      
-    
     
     public Curso(){
     }

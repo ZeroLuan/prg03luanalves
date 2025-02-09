@@ -4,18 +4,28 @@
  */
 package br.com.ifba.curso.view;
 
-import br.com.curso.dao.CursoDao;
-import br.com.curso.dao.CursoIDao;
+import br.com.ifba.curso.controller.CursoController;
+import br.com.ifba.curso.dao.CursoDao;
+import br.com.ifba.curso.dao.CursoIDao;
+import br.com.ifba.curso.controller.CursoIController;
 import br.com.ifba.curso.entity.Curso;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
+import org.springframework.stereotype.Component;
 
 /**
  *
  * @author a1591
  */
+
+@Component
 public class CursoListar extends javax.swing.JFrame {
 
+    @Autowired
+    private ApplicationContext context;
+    
     /**
      * Creates new form CursoListar
      */
@@ -170,7 +180,9 @@ public class CursoListar extends javax.swing.JFrame {
         // TODO add your handling code here:
         
         // Abre a tela ao apertar o botão
-        CursoAdicionar cursoAdicionar = new CursoAdicionar(this);
+        CursoAdicionar cursoAdicionar = context.getBean(CursoAdicionar.class);
+        
+        cursoAdicionar.setDefaultCloseOperation(CursoEditar.DISPOSE_ON_CLOSE);
         cursoAdicionar.setVisible(true);
     }//GEN-LAST:event_cadastrarNovoCursoActionPerformed
 
@@ -178,7 +190,9 @@ public class CursoListar extends javax.swing.JFrame {
         // TODO add your handling code here:
         
         // Abre a tela ao apertar o botão
-        CursoProcurar cursoProcurar = new CursoProcurar();   
+        CursoProcurar cursoProcurar = context.getBean(CursoProcurar.class); 
+        
+        cursoProcurar.setDefaultCloseOperation(CursoEditar.DISPOSE_ON_CLOSE);
         cursoProcurar.setVisible(true);      
     }//GEN-LAST:event_buttonProcurarCursoActionPerformed
 
@@ -186,15 +200,20 @@ public class CursoListar extends javax.swing.JFrame {
         // TODO add your handling code here:
         
         // Abre a tela ao apertar o botão
-        CursoEditar cursoEditar = new CursoEditar(this);
+        CursoEditar cursoEditar = context.getBean(CursoEditar.class);
+        
+        cursoEditar.setDefaultCloseOperation(CursoEditar.DISPOSE_ON_CLOSE);
         cursoEditar.setVisible(true);
+        
     }//GEN-LAST:event_buttonEditarActionPerformed
 
     private void buttonExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonExcluirActionPerformed
         // TODO add your handling code here:  
         
         // Abre a tela ao apertar o botão
-        CursoExcluir cursoExcluir = new CursoExcluir(this);
+        CursoExcluir cursoExcluir = context.getBean(CursoExcluir.class);
+        
+        cursoExcluir.setDefaultCloseOperation(CursoExcluir.DISPOSE_ON_CLOSE);
         cursoExcluir.setVisible(true);    
     }//GEN-LAST:event_buttonExcluirActionPerformed
 
