@@ -13,7 +13,6 @@ import org.springframework.stereotype.Repository;
  *
  * @author a1591
  */
-@Repository
 public class CursoDao extends GenericDao<Curso> implements CursoIDao {
     
     @Override

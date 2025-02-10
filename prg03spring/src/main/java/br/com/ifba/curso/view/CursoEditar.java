@@ -4,7 +4,6 @@
  */
 package br.com.ifba.curso.view;
 
-import br.com.ifba.curso.controller.CursoController;
 import br.com.ifba.curso.controller.CursoIController;
 import br.com.ifba.curso.entity.Curso;
 import javax.swing.JFrame;
@@ -179,7 +178,7 @@ public class CursoEditar extends javax.swing.JFrame {
             Curso curso = new Curso();
         
             // Busca o curso no banco de dados pelo ID
-            curso = cursoController.findById(Long.parseLong(textFildID.getText()));
+            curso = cursoController.findById(Long.valueOf(textFildID.getText()));
 
             // Atualiza os atributos do curso com os novos valores
             curso.setNome(textFildNomeAtualizar.getText()); // Atualiza o nome do curso

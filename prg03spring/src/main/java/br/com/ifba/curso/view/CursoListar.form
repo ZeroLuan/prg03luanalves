@@ -29,7 +29,7 @@
                   <Component id="scrollTabelaDeInfo" alignment="0" min="-2" pref="578" max="-2" attributes="0"/>
                   <Group type="102" alignment="0" attributes="0">
                       <Component id="buttonProcurarCurso" min="-2" pref="160" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="178" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="180" max="-2" attributes="0"/>
                       <Component id="cadastrarNovoCurso" min="-2" pref="88" max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -48,9 +48,9 @@
           <Group type="102" attributes="0">
               <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="cadastrarNovoCurso" alignment="3" min="-2" pref="47" max="-2" attributes="0"/>
                   <Component id="buttonProcurarCurso" alignment="3" min="-2" pref="45" max="-2" attributes="0"/>
                   <Component id="buttonAtualizarLista" alignment="3" min="-2" pref="45" max="-2" attributes="0"/>
+                  <Component id="cadastrarNovoCurso" alignment="3" min="-2" pref="47" max="-2" attributes="0"/>
               </Group>
               <EmptySpace pref="44" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
