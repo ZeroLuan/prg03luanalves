@@ -8,7 +8,8 @@ import br.com.ifba.curso.entity.Curso;
 import br.com.ifba.curso.repository.CursoRepository;
 import java.util.List;
 import java.util.Optional;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 /**
@@ -16,10 +17,11 @@ import org.springframework.stereotype.Service;
  * @author a1591
  */
 @Service
+@RequiredArgsConstructor
+@Slf4j
 public class CursoService implements CursoIService{
 
-    @Autowired
-    private CursoRepository cursoRepository;
+    private final CursoRepository cursoRepository;
     
     @Override
     public Curso save(Curso curso) throws RuntimeException{
@@ -33,6 +35,7 @@ public class CursoService implements CursoIService{
             
           //Se o curso não for nulo e não tiver ID, então ele é inserido no banco de dados
         } else {
+            log.info("Salvando Objeto Curso no Banco!");
             return cursoRepository.save(curso);
             
         }
@@ -41,6 +44,7 @@ public class CursoService implements CursoIService{
     @Override
     public List<Curso> findAll() {
         //Retorna todos os cursos encontrados no banco de dados
+        log.info("Prcurando Todos Objeto Curso no Banco!");
         return cursoRepository.findAll();
     }
 
@@ -60,6 +64,7 @@ public class CursoService implements CursoIService{
         }
 
         // Atualiza o curso no banco de dados
+        log.info("Atualizando Objeto Curso no Banco!");
         return cursoRepository.save(curso);
     }
 
@@ -70,6 +75,7 @@ public class CursoService implements CursoIService{
             throw new RuntimeException ("Dados do curso nao preenchidos");
         //Exclui o curso do banco de dados utilizando o cursoDao
         } else {
+            log.info("Excluindo Objeto Curso no Banco!");
             cursoRepository.delete(curso);
         }
     }
@@ -83,6 +89,7 @@ public class CursoService implements CursoIService{
         //Retorna o curso encontrado pelo ID utilizando o cursoDao
         } else {
             //Retorna o curso encontrado pelo ID utilizando o cursoRepository ou uma exceção caso o curso não seja encontrado
+            log.info("Procurando Objeto Curso no Banco Pelo ID!");
             return cursoRepository.findById(id).orElseThrow(() -> new RuntimeException("Curso nao encontrado."));
         }
     }
@@ -94,6 +101,7 @@ public class CursoService implements CursoIService{
             throw new RuntimeException ("Nome não preenchido");
         } else {
             //Retorna uma lista de cursos encontrados pelo nome utilizando o cursoDao
+            log.info("Procurando Objeto Curso no Banco Pelo Nome!");
             return cursoRepository.findByNome(nome);
         }
     }

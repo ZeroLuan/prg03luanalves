@@ -119,7 +119,7 @@ public class CursoProcurar extends javax.swing.JFrame {
         Curso cursoEncontrado = new Curso();
         
         // Recebe o curso pelo ID
-        cursoEncontrado = cursoController.findById(Long.parseLong(textFildFindID.getText()));
+        cursoEncontrado = cursoController.findById(Long.valueOf(textFildFindID.getText()));
         
         // Exibe as informaçãoes do Curso
         jLableStatusExibir.setText(cursoEncontrado.toString());
@@ -154,6 +154,7 @@ public class CursoProcurar extends javax.swing.JFrame {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
             public void run() {
                 new CursoProcurar().setVisible(true);
             }

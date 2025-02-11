@@ -27,6 +27,26 @@ public class CursoListar extends javax.swing.JFrame {
     /**
      * Creates new form CursoListar
      */
+    
+        public void readJTable(){// Metodo responsavel por atualizar a exibição do curso na tablea
+        
+        CursoIDao cdao = new CursoDao(); // Instancia o local onde sera atualizado
+        List<Curso> cursos = cdao.findAll();
+        
+        DefaultTableModel model = (DefaultTableModel) tabelaExibir.getModel();// Exibe o modelo  
+        model.setRowCount(0);// Seta nessa linha o modelo
+        
+        for(Curso c : cursos){// Adiciona na tabela já existente 
+            
+            model.addRow(new Object[]{
+               c.getId(),
+               c.getNome(),
+               c.getCodigoCurso(),
+               c.isAtivo()
+            });
+        }  
+    }
+        
     public CursoListar() {
         initComponents();
         DefaultTableModel model = (DefaultTableModel) tabelaExibir.getModel(); // Gerenciar modelo da tabela
@@ -154,24 +174,6 @@ public class CursoListar extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    public void readJTable(){// Metodo responsavel por atualizar a exibição do curso na tablea
-        
-        CursoIDao cdao = new CursoDao(); // Instancia o local onde sera atualizado
-        List<Curso> cursos = cdao.findAll();
-        
-        DefaultTableModel model = (DefaultTableModel) tabelaExibir.getModel();// Exibe o modelo  
-        model.setRowCount(0);// Seta nessa linha o modelo
-        
-        for(Curso c : cursos){// Adiciona na tabela já existente 
-            
-            model.addRow(new Object[]{
-               c.getId(),
-               c.getNome(),
-               c.getCodigoCurso(),
-               c.getAtivo()
-            });
-        }  
-    }
       
     // Botão para cadastrar novo curso
     private void cadastrarNovoCursoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cadastrarNovoCursoActionPerformed
@@ -251,6 +253,7 @@ public class CursoListar extends javax.swing.JFrame {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
             public void run() {
                 CursoListar listarFrame = new CursoListar();
                 listarFrame.setVisible(true); // Certifique-se de mostrar o frame principal

@@ -118,7 +118,7 @@ public class CursoExcluir extends javax.swing.JFrame {
         }
         
         // Procura o curso pelo ID
-        Curso cursoExcluir = cursoController.findById(Long.parseLong(textFildFindIDExcluir.getText()));
+        Curso cursoExcluir = cursoController.findById(Long.valueOf(textFildFindIDExcluir.getText()));
 
         // Remove o curso
         cursoController.delete(cursoExcluir); 
@@ -154,6 +154,7 @@ public class CursoExcluir extends javax.swing.JFrame {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
             public void run() {
                 CursoListar listarFrame = new CursoListar();
                 new CursoExcluir(listarFrame).setVisible(true);
