@@ -103,7 +103,7 @@ public class View extends javax.swing.JFrame {
 
         // Pega o número escolhido pelo usuário no spinner
         int palpiteUsuario = (int) jSpineerValorUser.getValue();
-
+        
         // Verifica se o palpite está correto
         if (palpiteUsuario == numeroSorteado) {
             lblResultado.setText("Acertou! O número era " + numeroSorteado + ".");
