@@ -168,20 +168,22 @@ public class View extends javax.swing.JFrame {
         // TODO add your handling code here:
         
         try {
+            // Obtém os valores dos sliders, passa par o contador
             Integer inicio = jSliderInicio.getValue();
             Integer fim = jSliderFim.getValue();
             Integer passos = jSliderPassos.getValue();
 
+            // Cria um modelo de lista que armazenará os números gerados
             DefaultListModel lista = new DefaultListModel();
 
+            // Loop que gera os números conforme o intervalo e o passo informados
             for(int i = inicio; i <= fim; i += passos){
-                lista.addElement(i);
+                lista.addElement(i);// Adiciona o número conforme o intecalo e o passo informado
             }
 
+            // Define o modelo gerado na lisra gráfica
             jListExibirNumeros.setModel(lista);
-            
-        } catch (IllegalArgumentException e) {
-            JOptionPane.showMessageDialog(null, "Erro: " + e.getMessage(), "Entrada inválida", JOptionPane.WARNING_MESSAGE);
+
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Ocorreu um erro inesperado: " + e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
         }
