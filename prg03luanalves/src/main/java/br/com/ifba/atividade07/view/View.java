@@ -95,18 +95,18 @@ public class View extends javax.swing.JFrame {
     private void btnFatorialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFatorialActionPerformed
         // TODO add your handling code here:
         
-        int n = Integer.parseInt(jSpinnerContador.getValue().toString());//
+        int n = Integer.parseInt(jSpinnerContador.getValue().toString());// Pega o valor do sppiner
         
-        if(n<0){
+        if(n<0){ // verifica se o valor de spinner é menor que zero, se for gera excessao e um aviso pro user.
             JOptionPane.showMessageDialog(null, "Valor menor que 0 é invalido.");
             throw new IllegalArgumentException("O valor não pode ser nagativo");
         }
         
         
         
-        Fatorial f = new Fatorial();
+        Fatorial f = new Fatorial();// Instancia a fatorial
         f.setValor(n);
-        lblFormula.setText(f.getFormula());
+        lblFormula.setText(f.getFormula());// aprensenta pro usuario valor e resultado.
         lblResultado.setText(Integer.toString(f.getFatorial()));
         
         

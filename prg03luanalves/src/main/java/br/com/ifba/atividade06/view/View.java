@@ -21,6 +21,7 @@ public class View extends javax.swing.JFrame {
      */
     public View() {
         initComponents();
+        this.setLocationRelativeTo(null); // Centraliza a janela.
     }
 
     /**
