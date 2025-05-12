@@ -42,6 +42,15 @@ public class Main {
             System.out.println(conta.toString());
         }
 
+        System.out.println("\nPAGANDO MENSALIDADE:");
+        for (ContaBanco conta : contaBanco) {
+            conta.pagarMensalidade();
+        }
+
+        for (ContaBanco conta : contaBanco) {
+            System.out.println(conta.toString());
+        }
+
         System.out.println("\nEXCLUINDO CONTA:");
         contaBanco02.fecharConta(contaBanco, 20); // Tenta excluir a conta 20
 

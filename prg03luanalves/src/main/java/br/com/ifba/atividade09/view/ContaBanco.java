@@ -30,6 +30,15 @@ public class ContaBanco {
         this.saldo = 0F;
         this.status = false;
     }
+   
+    
+    
+    
+    
+    
+    
+    
+    
     
    // Metodo responsavel por abrir a conta, passando como parametro numero da conta, tipo da conta e nome do dono da conta.
     public void abrirConta(Integer numConta, TipoContaEnum tipo, String dono){
@@ -49,6 +58,8 @@ public class ContaBanco {
         
     }
     
+    
+    
     // Método para fechar uma conta
     public void fecharConta(List<ContaBanco> contaBanco, Integer numeroDaConta){
             
@@ -58,7 +69,7 @@ public class ContaBanco {
         //Verifica se o saldo é igual a zero.
         if(contaEncontrada.saldo == 0){
                     
-            contaBanco.remove(contaEncontrada);
+            contaBanco.remove(contaEncontrada);// Removendo
             
             System.out.println("Conta Removida.");
                 
@@ -66,28 +77,31 @@ public class ContaBanco {
         }else{
             System.out.println("VALOR DIFERENTE DE 0, CONTA NAO PODE SER EXCLUIDA.");
         }    
- 
     }
+    
+    
     
     public void depositar(List<ContaBanco> contaBanco, Integer numeroDaConta, Float valorDepositado){
         
         // Recebe do metodo getByIdContaBanco a conta procurada
         ContaBanco contaEncontrada = getByIdContaBanco(contaBanco, numeroDaConta);
         
-        if (contaEncontrada == null) {
-        System.out.println("Conta não encontrada.");
+        if (contaEncontrada == null) {// Verifiando se é null
+        System.out.println("Conta neo encontrada.");
         return;
         }
 
-        if (!contaEncontrada.status) {
-            System.out.println("Conta está inativa. Não é possível depositar.");
+        if (!contaEncontrada.status) {// verificando status
+            System.out.println("Conta este inativa. Nao e possível depositar.");
             return;
         }
 
         contaEncontrada.saldo += valorDepositado;
-        System.out.println("Depósito de R$ " + valorDepositado + " realizado com sucesso.");
+        System.out.println("Deposito de R$ " + valorDepositado + " realizado com sucesso.");
         
     }
+    
+    
     
     public void sacar(List<ContaBanco> contaBanco, Integer numeroDaConta, Float valorSacado){
         
@@ -95,12 +109,12 @@ public class ContaBanco {
         ContaBanco contaEncontrada = getByIdContaBanco(contaBanco, numeroDaConta);
         
          if (contaEncontrada == null) {
-        System.out.println("Conta não encontrada.");
+        System.out.println("Conta nao encontrada.");
         return;
         }
 
         if (!contaEncontrada.status) {
-            System.out.println("Conta está inativa. Não é possível sacar.");
+            System.out.println("Conta esta inativa. Não e possevel sacar.");
             return;
         }
 
@@ -115,21 +129,34 @@ public class ContaBanco {
     
     
     
+    public void pagarMensalidade() {
+        
+        if (!status) {
+            System.out.println("Conta inativa. Mensalidade não pode ser cobrada.");
+            return;
+        }
+
+        float valorMensalidade;
+
+        if (tipo == TipoContaEnum.CC) {// Vefificando se o valor corresponde ao tipo de conta
+            valorMensalidade = 12F;
+        } else if (tipo == TipoContaEnum.CP) {
+            valorMensalidade = 20F;
+        } else {
+            System.out.println("Tipo de conta inválido.");
+            return;
+        }
+
+        if (saldo >= valorMensalidade) {
+            saldo -= valorMensalidade;
+            System.out.println("Mensalidade de R$" + valorMensalidade + " paga com sucesso pela conta " + numConta + ".");
+        } else {
+            System.out.println("Saldo insuficiente para pagar a mensalidade da conta " + numConta + ".");
+        }
+    }
+
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+   
    
     // Pega A conta pelo ID
     public ContaBanco getByIdContaBanco(List<ContaBanco> contaBanco, Integer numeroDaConta){
@@ -151,9 +178,17 @@ public class ContaBanco {
                 
             }
         }
-        
-        return null;
+        // Se não retornar a gente trata depois, gerar essa excecao
+        throw new IllegalArgumentException("Conta com número " + numeroDaConta + " não encontrada.");
     }
+    
+    
+    
+    
+    
+    
+    
+    
     
     
     @Override
