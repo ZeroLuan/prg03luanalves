@@ -8,7 +8,7 @@ import java.util.List;
 
 /**
  *
- * @author a1591
+ * @author Luan Alves de Souza a159
  */
 public class ContaBanco {
     
@@ -38,7 +38,7 @@ public class ContaBanco {
     
     
     
-    
+    // By Luan Alves de Souza
     
    // Metodo responsavel por abrir a conta, passando como parametro numero da conta, tipo da conta e nome do dono da conta.
     public void abrirConta(Integer numConta, TipoContaEnum tipo, String dono){
@@ -147,7 +147,7 @@ public class ContaBanco {
             return;
         }
 
-        if (saldo >= valorMensalidade) {
+        if (saldo >= valorMensalidade) { // Verifica se o saldo é maior que a mensalidade
             saldo -= valorMensalidade;
             System.out.println("Mensalidade de R$" + valorMensalidade + " paga com sucesso pela conta " + numConta + ".");
         } else {
@@ -158,7 +158,7 @@ public class ContaBanco {
     
    
    
-    // Pega A conta pelo ID
+    // Pega A conta pelo ID   by Luan Alves de Souza
     public ContaBanco getByIdContaBanco(List<ContaBanco> contaBanco, Integer numeroDaConta){
         
         // Lista que armazena as contas
@@ -189,7 +189,7 @@ public class ContaBanco {
     
     
     
-    
+    // By Luan Alves de Sozua
     
     @Override
     public String toString() {

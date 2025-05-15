@@ -6,7 +6,7 @@ package br.com.ifba.atividade08.view;
 
 /**
  *
- * @author a1591
+ * @author Luan Alves de Souza "a1591"
  */
 public enum TipoContaEnum {
     
