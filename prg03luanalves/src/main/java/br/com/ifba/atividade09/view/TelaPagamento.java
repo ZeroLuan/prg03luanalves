@@ -4,7 +4,6 @@
  */
 package br.com.ifba.atividade09.view;
 
-import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 
 
